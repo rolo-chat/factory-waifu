@@ -1,11 +1,11 @@
 import {Model, ModelStatic, Sequelize} from 'sequelize';
-import {AttributesGenerator, ModelsStorage, ModelStorage} from './index.interface';
+import {AttributesGenerator, ModelsStorage, ModelStorage, Factory} from './index.interface';
 
 let sequelize: Sequelize | undefined;
 
 const models: ModelsStorage = {};
 
-export const factory = {
+export const factory: Factory = {
   /** Initialize the factory. Let's get to work! */
   init(sequelizeInstance: Sequelize) {
     sequelize = sequelizeInstance;
