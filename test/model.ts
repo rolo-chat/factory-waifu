@@ -2,13 +2,13 @@
 import {Model, STRING, UUID, UUIDV4} from 'sequelize';
 import {sequelize} from './sequelize';
 
-/** Attributes of the SequelizeMeta instances */
+/** Attributes of the Test instances */
 interface TestCreationAttributes {
   /** Instance name */
   name: string;
 }
 
-/** Attributes of the SequelizeMeta instances */
+/** Attributes of the Test instances */
 type TestAttributes = TestCreationAttributes & {
   /** Instance id */
   id: string;
