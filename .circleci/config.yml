@@ -1,0 +1,64 @@
+version: 2.1
+
+executors:
+  node:
+    docker:
+      - image: cimg/node:16.2
+        auth:
+          username: $DOCKERHUB_USER
+          password: $DOCKERHUB_PASSWORD
+
+jobs:
+  # Run the linter on the whole code
+  lint:
+    executor: node
+    steps:
+      - checkout
+      - run: npm ci
+      - run: npm run lint
+
+  # Run tests with docker compose
+  test:
+    executor: node
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: npm run test:compose
+
+  build-publish:
+    executor: node
+    steps:
+      - checkout
+      - run: npm ci
+      - run: npm publish
+      
+workflows:
+  version: 2
+  test_build_publish:
+    jobs:
+      # Check the linting
+      - lint:
+          context: global
+          filters: &any
+            # Trigger for any tag or branch
+            branches:
+              only: /.*/
+            tags:
+              only: /.*/
+
+      # Run tests
+      - test:
+          context: global
+          filters:
+            <<: *any
+
+      - build-publish:
+          context: global
+          requires:
+            - lint
+            - test
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v?[0-9]+\.[0-9]+\.[0-9]+(?:-(?:rc|beta|alpha)\.[0-9]+)?$/

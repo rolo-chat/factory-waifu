@@ -1,0 +1,14 @@
+{
+  "editor.formatOnSave": false,
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true
+  },
+  "typescript.validate.enable": false,
+  "javascript.validate.enable": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.markdownlint": true
+  },
+  "typescript.autoClosingTags": false
+}

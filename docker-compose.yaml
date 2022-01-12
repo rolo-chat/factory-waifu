@@ -1,0 +1,27 @@
+# Docker compose files used for testing in container
+version: '3'
+
+services:
+  service:
+    build:
+      context: .
+      # stop at the dependency stage
+      target: base
+      args:
+        GITHUB_TOKEN: ${GITHUB_TOKEN}
+    # override the command to run the test functions
+    command: ['run', 'test:ci']
+    entrypoint: npm
+    depends_on:
+      - postgres
+    environment:
+      SQL_HOST: postgres
+
+  postgres:
+    image: postgres:12-alpine
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: rolo
+    expose:
+      - "5432"
