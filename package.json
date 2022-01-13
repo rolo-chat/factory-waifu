@@ -1,6 +1,6 @@
 {
   "name": "factory-waifu",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A factory library for node.js + sequelize inspired by factory-girl",
   "main": "dist/index.js",
   "scripts": {
