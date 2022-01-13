@@ -1,6 +1,8 @@
 import {Model, ModelStatic, Sequelize} from 'sequelize';
 import {AttributesGenerator, ModelsStorage, ModelStorage, Factory} from './index.interface';
 
+export type {Factory};
+
 let sequelize: Sequelize | undefined;
 
 const models: ModelsStorage = {};
